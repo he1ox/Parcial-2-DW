@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+</head>
+<body>
+    <h1>Lista de Tareas</h1>
+    <input type="text" id="tareaInput" placeholder="Nueva tarea">
+    <button id="agregarBtn">Agregar</button>
+    <ul id="listaTareas"></ul>
+
+    <script type="module">
+        import { agregarTarea, marcarComoCompletada, mostrarTareas } from './aggregator.js';
+
+        const tareaInput = document.getElementById('tareaInput');
+        const agregarBtn = document.getElementById('agregarBtn');
+        const listaTareas = document.getElementById('listaTareas');
+
+        agregarBtn.addEventListener('click', () => {
+            const nuevaTarea = tareaInput.value;
+            if (nuevaTarea.trim() !== '') {
+                agregarTarea(nuevaTarea);
+                tareaInput.value = '';
+                mostrarTareas();
+            }
+        });
+
+        listaTareas.addEventListener('click', (e) => {
+            const indice = parseInt(e.target.getAttribute('data-indice'));
+            if (!isNaN(indice)) {
+                marcarComoCompletada(indice);
+                mostrarTareas();
+            }
+        });
+
+        mostrarTareas();
+    </script>
+</body>
+</html>

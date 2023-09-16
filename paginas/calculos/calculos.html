@@ -3,17 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora</title>
 </head>
 <body>
+    <h1>Calculadora</h1>
+    <div>
+        <label for="numero1">Número 1:</label>
+        <input type="number" id="numero1">
+    </div>
+    <div>
+        <label for="numero2">Número 2:</label>
+        <input type="number" id="numero2">
+    </div>
+    <button id="sumar">Sumar</button>
+    <button id="restar">Restar</button>
+    <button id="multiplicar">Multiplicar</button>
+    <button id="dividir">Dividir</button>
+    <p>Resultado: <span id="resultado"></span></p>
+
     <script type="module">
         import { sumar, restar, multiplicar, dividir } from '/aggregator.js';
       
-        // Llama a las funciones importadas
-        const resultadoSuma = sumar(5, 3); // Ejemplo de uso: suma 5 y 3
-        console.log(resultadoSuma);
+        const numero1Input = document.getElementById('numero1');
+        const numero2Input = document.getElementById('numero2');
+        const sumarButton = document.getElementById('sumar');
+        const restarButton = document.getElementById('restar');
+        const multiplicarButton = document.getElementById('multiplicar');
+        const dividirButton = document.getElementById('dividir');
+        const resultadoSpan = document.getElementById('resultado');
       
-        // Puedes hacer lo mismo para las otras funciones
+        // Funciones para realizar cálculos y actualizar el resultado
+        sumarButton.addEventListener('click', () => {
+            const numero1 = parseFloat(numero1Input.value);
+            const numero2 = parseFloat(numero2Input.value);
+            const resultado = sumar(numero1, numero2);
+            resultadoSpan.textContent = resultado;
+        });
+      
+        restarButton.addEventListener('click', () => {
+            const numero1 = parseFloat(numero1Input.value);
+            const numero2 = parseFloat(numero2Input.value);
+            const resultado = restar(numero1, numero2);
+            resultadoSpan.textContent = resultado;
+        });
+      
+        multiplicarButton.addEventListener('click', () => {
+            const numero1 = parseFloat(numero1Input.value);
+            const numero2 = parseFloat(numero2Input.value);
+            const resultado = multiplicar(numero1, numero2);
+            resultadoSpan.textContent = resultado;
+        });
+      
+        dividirButton.addEventListener('click', () => {
+            const numero1 = parseFloat(numero1Input.value);
+            const numero2 = parseFloat(numero2Input.value);
+            const resultado = dividir(numero1, numero2);
+            resultadoSpan.textContent = resultado;
+        });
       </script>
 </body>
 </html>

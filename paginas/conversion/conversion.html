@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversor de Temperatura</title>
+</head>
+<body>
+    <h1>Conversor de Temperatura</h1>
+    
+    <label for="tempInput">Temperatura:</label>
+    <input type="number" id="tempInput">
+    
+    <label for="fromUnit">De:</label>
+    <select id="fromUnit">
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+    </select>
+    
+    <label for="toUnit">A:</label>
+    <select id="toUnit">
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+    </select>
+    
+    <button id="convertTemperature">Convertir</button>
+    
+    <p>Resultado: <span id="result"></span></p>
+
+    <script type='module'>
+        import {celsiusToFahrenheit, fahrenheitToCelsius} from './conversion.js';
+        const convertTemperature = document.getElementById('convertTemperature');
+
+        convertTemperature.addEventListener('click',() => {
+
+            const inputTemperature = parseFloat(document.getElementById("tempInput").value);
+            const fromUnit = document.getElementById("fromUnit").value;
+            const toUnit = document.getElementById("toUnit").value;
+            let result;
+
+            if (fromUnit === "celsius" && toUnit === "fahrenheit") {
+                result = celsiusToFahrenheit(inputTemperature);
+            } else if (fromUnit === "fahrenheit" && toUnit === "celsius") {
+                result = fahrenheitToCelsius(inputTemperature);
+            } else {
+                result = inputTemperature; // No es necesario convertir si las unidades son las mismas
+            }
+
+            document.getElementById("result").textContent = result;
+        });
+
+    </script>
+</body>
+</html>
